@@ -7,23 +7,24 @@ import javax.swing.*;
  */
 public class MusicGui extends JFrame{
     private JPanel rootPanel;
-
+    private JTabbedPane containerTabbedPane;
 
     //new song components
     private JTabbedPane newSongTabbedPane;
     private JTextField songTitleTextBox;
     private JTextField composerTextField;
-    private JComboBox formatComboBox;
     private JComboBox styleComboBox;
     private JComboBox genreComboBox;
-    private JRadioButton lyricsRadioButton;
+    private JRadioButton yesRadioButton;
     private JTextField instrumentTextField;
-    private JRadioButton aboveMiddleCRadioButton;
     private JComboBox keyComboBox;
     private JTextField timeSignatureTextField;
     private JTextField firstPageTextField;
     private JTextField durationTextField;
     private JButton addSongButton;
+    private JComboBox formatComboBox;
+    private JComboBox lowestComboBox;
+    private JComboBox highestComboBox;
 
     //new Book components
     private JTabbedPane newBookTabbedPane;
@@ -33,16 +34,8 @@ public class MusicGui extends JFrame{
     private JComboBox bookLocationComboBox;
     private JButton addNewBookButton;
 
-    //new Album components
-    private JTabbedPane AlbumTabbedPane;
-    private JTextField albumTitleTextField;
-    private JTextField artistOrGroupTextField;
-    private JComboBox albumLocationComboBox;
-    private JList albumTitlesJList;
-    private JButton addNewAlbumButton;
-
     //search components
-    private JTabbedPane searchTabbedPane;//search pane
+    private JTabbedPane searcherTabbedPane;//search pane
     private JComboBox searchSongTitleComboBox;//optional query parameter
     private JComboBox searchBookTitleComboBox;//optional query parameter
     private JComboBox searchAlbumTitleComboBox;//optional query parameter
@@ -53,6 +46,7 @@ public class MusicGui extends JFrame{
     private JButton deleteEntryButton;
     private JButton exitButton;
     private JButton editEntryButton;
+
 
     protected MusicGui(){
         setContentPane(rootPanel);
