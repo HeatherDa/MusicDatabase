@@ -7,12 +7,12 @@ import java.sql.SQLException;
 /**
  * Created by cryst on 5/8/2016.
  */
-public class MusicBookDataModel extends AbstractTableModel {
+public class SongDataModel extends AbstractTableModel {
     private static int rowCount=0;
     private static int colCount=0;
     static ResultSet resultSet;
 
-    public MusicBookDataModel(ResultSet results){
+    public SongDataModel(ResultSet results){
         resultSet=results;
         setup();
         Main.addTestData();

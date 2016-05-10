@@ -12,6 +12,9 @@ public class Main {
 
     static Connection connect=null;
     static Statement statement=null;
+
+    static SongDataModel songDataModel;
+    static BookDataModel bookDataModel;
     static ArrayList<String> tableNames=new ArrayList<>();
     static ArrayList<ArrayList> testDataSong;
     static ArrayList<ArrayList> testDataBook;
@@ -25,10 +28,10 @@ public class Main {
     static PreparedStatement delSong=null;
     static PreparedStatement delBook=null;
     static PreparedStatement delBook2=null;
-
+    static ResultSet rsSong=null;
+    static ResultSet rsBook=null;
 
     public static void main(String[] args) throws SQLException {
-	// write your code here
         setup();
 
 
@@ -63,13 +66,15 @@ public class Main {
             String dBook2="DELETE FROM Song WHERE BookID=?";
             delBook2=connect.prepareStatement(dBook2);
 
+
             //loadAllData(); TODO write function
-
+            loadAllSongData();
+            loadAllBookData();
             addTestData();
-
-            //TODO initiate DataModel
-
-            //TODO intantiate Gui
+            //make TableModel
+            //MusicBookDataModel mB=new MusicBookDataModel(rs);
+            //make Gui
+            MusicGui gui=new MusicGui(songDataModel, bookDataModel);
 
 
 
@@ -237,6 +242,67 @@ public class Main {
             return false;
         }
     }
+
+    //make results list of all data from Song table
+    public static boolean loadAllSongData(){
+
+        try{
+
+            if (rsSong!=null) {
+                rsSong.close();
+            }
+
+            String getAllData = "SELECT * FROM Song";
+            rsSong = statement.executeQuery(getAllData);
+
+            if (songDataModel == null) {
+                //If no current songDataModel, then make one
+                songDataModel = new SongDataModel(rsSong);
+            } else {
+                //Or, if one already exists, update its ResultSet
+                songDataModel.updateResultSet(rsSong);
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error loading or reloading cube");
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    //make results list of all data from Book table
+    public static boolean loadAllBookData(){
+
+        try{
+
+            if (rsBook!=null) {
+                rsBook.close();
+            }
+
+            String getAllData = "SELECT * FROM Song";
+            rsBook = statement.executeQuery(getAllData);
+
+            if (bookDataModel == null) {
+                //If no current songDataModel, then make one
+                bookDataModel = new BookDataModel(rsBook);
+            } else {
+                //Or, if one already exists, update its ResultSet
+                bookDataModel.updateResultSet(rsBook);
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error loading or reloading cube");
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
     public static void addTestData() {
         try {
             //store test data

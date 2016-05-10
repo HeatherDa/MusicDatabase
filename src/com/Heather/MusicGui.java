@@ -1,6 +1,7 @@
 package com.Heather;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by cryst on 5/4/2016.
@@ -48,12 +49,14 @@ public class MusicGui extends JFrame{
     private JButton editEntryButton;
 
 
-    protected MusicGui(){
+    protected MusicGui(final SongDataModel songDataModel, final BookDataModel bookDataModel){
         setContentPane(rootPanel);
         pack();
-        setTitle("Music Inventory");
+        setTitle("Sheet Music Inventory");
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        searchResultsTable.setGridColor (Color.black);
+        searchResultsTable.setModel(songDataModel);
 
 
     }
